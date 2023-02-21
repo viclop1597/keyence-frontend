@@ -1,5 +1,7 @@
 import React from 'react';
 import Table from 'react-bootstrap/Table';
+import './button.css';
+import '@fortawesome/fontawesome-free/css/all.css';
 
 
 function DataTable(props) {
@@ -21,7 +23,7 @@ function DataTable(props) {
 
   // Render table
   return (
-    <Table striped="columns">
+    <><Table responsive striped bordered variant="dark">
       <thead>
         <tr>
            {header}
@@ -31,6 +33,13 @@ function DataTable(props) {
        {rows}
       </tbody>
     </Table>
+
+    <div>
+    <button><i className='fas fa-plus-circle'></i></button>
+    <button><i className='fas fa-edit'></i></button>
+    <button><i className='fas fa-trash-alt'></i></button>
+    </div></>
+
   );
 }
 

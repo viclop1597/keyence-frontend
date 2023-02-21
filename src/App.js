@@ -15,9 +15,6 @@ import * as XLSX from 'xlsx';
 import './App.css';
 
 
-import ThemeSwitcher from "./ThemeSwitcher";
-
-
 function App() {
   const [data, setData] = React.useState([]);
 
@@ -27,24 +24,39 @@ function App() {
     const i = 0;
     const reader = new FileReader();
     const rABS = !!reader.readAsBinaryString;
-
+  
     reader.onload = (e) => {
       /* Parse data */
       const bstr = e.target.result;
-      const wb = XLSX.read(bstr, {type:rABS ? 'binary' : 'array'});
-
-      /* Get first worksheet */
+      const wb = XLSX.read(bstr, { type: rABS ? 'binary' : 'array' });
+  
+      // Get first worksheet /
       const wsname = wb.SheetNames[0];
       const ws = wb.Sheets[wsname];
-
-      /* Convert array of arrays */
-      const data = XLSX.utils.sheet_to_json(ws, {header:1});
+  
+      // Convert array of arrays /
+      const data = XLSX.utils.sheet_to_json(ws, { header: 1, raw: false });
+  
+      // Convert all cell values to strings /
+      const newData = data.map(row => {
+        return row.map(cell => {
+          if (typeof cell === 'number') {
+            return cell.toString();
+          } else {
+            return cell;
+          }
+        });
+      });
+  
       /* Update state */
-      setData(data);
+      setData(newData);
     };
-
-    if(rABS) reader.readAsBinaryString(files[i]); else reader.readAsArrayBuffer(files[i]);
-    // Call the function to render the table
+  
+    if (rABS) {
+      reader.readAsBinaryString(files[i]);
+    } else {
+      reader.readAsArrayBuffer(files[i]);
+    }
   }
 
   return (
@@ -56,10 +68,14 @@ function App() {
         </p>
 
         <input type="file"
+               name='demo'
                id="demo" accept=".xls,.xlsx"
-               onChange={handleFile}/>        
-               
-        <ThemeSwitcher/>
+               onChange={handleFile}
+               className="inputfile"/>
+        <label for="demo">Choose a file</label>
+
+             
+          
 
         {data.length > 0 && <DataTable data={data} />}
       </header>
