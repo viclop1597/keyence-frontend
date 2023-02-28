@@ -1,6 +1,7 @@
 import logo from './logo.svg';
 import React from 'react';
 import DataTable from './DataTable';
+import { Routes, Route, Link } from "react-router-dom";
 
 // Bootstrap
 // Bootstrap CSS
@@ -15,7 +16,16 @@ import * as XLSX from 'xlsx';
 import './App.css';
 
 
+
+
 function App() {
+
+  //
+   
+
+//
+
+
   const [data, setData] = React.useState([]);
 
   // Function to convert xlsx to json
@@ -61,25 +71,27 @@ function App() {
 
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
+       <header className="App-header">
+         <img src={logo} className="App-logo" alt="logo" />
+         <p>
+           Edit <code>src/App.js</code> and save to reload.
+         </p>
 
-        <input type="file"
-               name='demo'
-               id="demo" accept=".xls,.xlsx"
-               onChange={handleFile}
-               className="inputfile"/>
-        <label for="demo">Choose a file</label>
-
+         <input type="file"
+                name='demo'
+                id="demo" accept=".xls,.xlsx"
+                onChange={handleFile}
+                className="inputfile"/>
+         <label for="demo">Choose a file</label>
+         <br></br>
              
           
 
-        {data.length > 0 && <DataTable data={data} />}
-      </header>
-    </div>
+         {data.length > 0 && <DataTable data={data} />}
+       </header>
+     </div>
   );
 }
+
+
 export default App;

@@ -23,23 +23,19 @@ function DataTable(props) {
 
   // Render table
   return (
-    <><Table responsive striped bordered variant="dark">
+    <><Table striped bordered variant="dark" >
       <thead>
-        <tr>
-           {header}
-        </tr>
+        <tr>{header}</tr>
       </thead>
       <tbody>
-       {rows}
+        {rows}
       </tbody>
     </Table>
-
     <div>
-    <button><i className='fas fa-plus-circle'></i></button>
-    <button><i className='fas fa-edit'></i></button>
-    <button><i className='fas fa-trash-alt'></i></button>
+        <button><i className='fas fa-plus-circle'></i></button>
+        <button><i className='fas fa-edit'></i></button>
+        <button><i className='fas fa-trash-alt'></i></button>
     </div></>
-
   );
 }
 
